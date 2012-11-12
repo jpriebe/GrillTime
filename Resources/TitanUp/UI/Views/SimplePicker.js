@@ -6,105 +6,114 @@ var TU = null;
  * 
  * Fires event: 'TUchange' (note, not 'change' like the standard picker); event object contains
  * a single property, 'value'
- * 
- * Note that you need to call addToViews() to add the picker button and the popup to views;
- * the popup must be added to a view that uses absolute layout.
  */
 
 function PickerPopup (title, values)
 {
-	var _self = Ti.UI.createWindow ({title: title});
+	var _self = null;
 	var _values = values;
 	var _value = '';
+	var _selidx = -1;
 	
-	var _picker = null;
-	var _btn_cancel = null;
-	var _btn_done = null;
+	var _tvValues = null;
+	var _btnCancel = null;
+	var _btnDone = null;
 	var _toolbar = null;
-	var _a_slide_in;
-	var _a_slide_out;
-
-	_a_slide_in =  Titanium.UI.createAnimation ({ bottom: 0 });
-	_a_slide_out =  Titanium.UI.createAnimation ({ bottom: -251 });
 	
-	_self = Titanium.UI.createView({
-		left: 0,
-		right: 0,
-		height: 251,
-		bottom: -251,
-		zIndex: 100
+	_self = Ti.UI.createWindow({
+		backgroundColor: TU.UI.Theme.lightBackgroundColor,
+		layout: 'vertical'
 	});
  
-	_btn_cancel =  Titanium.UI.createButton({
+	_btnCancel =  Ti.UI.createButton({
 		title: 'Cancel',
-		style: Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+		height: 25,
+		top: 2,
+		left: 20,
+		style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
 	});
  
-	_btn_done =  Titanium.UI.createButton({
+	_btnDone =  Ti.UI.createButton({
 		title: 'Done',
-		style: Titanium.UI.iPhone.SystemButtonStyle.DONE
+		height: 25,
+		top: 2,
+		right: 20,
+		style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
 	});
- 
-	var spacer =  Titanium.UI.createButton({
-		systemButton: Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-	});
- 
-	_toolbar =  Titanium.UI.createToolbar({
+	
+	var spacer =  Ti.UI.createButton({
+		systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
+	});	
+
+ 	_toolbar = Ti.UI.iOS.createToolbar ({
+ 		items: [_btnCancel, spacer, _btnDone],
+		backgroundColor:'#777',
 		top: 0,
-		items: [_btn_cancel, spacer, _btn_done]
+		borderTop: false,
+		borderBottom: true
 	});
- 
-	_picker = Titanium.UI.createPicker({
-		top: 43,
-		left: 0,
-		right: 0,
-		selectionIndicator: true
-	});
-	_picker.selectionIndicator=true;
- 
+	
+	_self.add (_toolbar);
+	
 	var data = [];
 	for (var i = 0; i < _values.length; i++)
 	{
-		data.push (Ti.UI.createPickerRow({title: _values[i]}));
-	}	
+		data.push ({title: _values[i]});
+	}
+	
+	var v = Ti.UI.createView ({
+	   left: 0,
+	   right: 0,
+	   bottom: 0,
+	   height: Ti.UI.FILL	    
+	});
 
-	_picker.add (data);
+	_tvValues = Ti.UI.createTableView ({
+		data: data,
+		borderWidth: 1,
+		borderColor: '#000',
+		borderRadius: 5,
+		top: 5,
+		left: 5,
+		right: 5,
+		bottom: 5,
+		allowSelection: true
+	});
 	
-	_self.add (_toolbar);
-	_self.add (_picker);
+	_tvValues.addEventListener ('click', function (e) {
+		_self.xsetValue (_values[e.index]);
+	});
 	
-	_btn_done.addEventListener('click', function (e) {
-		var val = _picker.getSelectedRow (0);
-		_value = val.title;
+	_self.add (v);
+	v.add (_tvValues);
+	
+	_btnDone.addEventListener('click', function (e) {
 		_self.fireEvent ('done', { value: _value });
-		
-		_self.slideOut ();
+		_self.close ();
 	});
 	
-	_btn_cancel.addEventListener('click', function (e) {
-		_self.slideOut ();
+	_btnCancel.addEventListener('click', function (e) {
+		_self.close ();
 	});
-	
-	_self.slideIn = function ()
-	{
-		for (var i = 0; i < _values.length; i++)
-		{
-			if (_values[i] == _value)
-			{
-				_picker.setSelectedRow (0, i, false);
-				break;
-			}
-		}
-		_self.animate (_a_slide_in);
-	}
-
-	_self.slideOut = function ()
-	{
-		_self.animate (_a_slide_out);
-	}
 	
 	_self.xsetValue = function (value)
 	{
+		if (_selidx > -1)
+		{
+			_tvValues.deselectRow (_selidx);
+		}
+		
+	    for (var i = 0; i < _values.length; i++)
+	    {
+	        if (_values[i] == value)
+	        {
+	        	_selidx = i;
+	            _tvValues.selectRow (_selidx);
+	            _tvValues.scrollToIndex (_selidx);
+	            break;
+	        }
+	    }
+
 		_value = value;
 	}
 	
@@ -115,13 +124,13 @@ function PickerPopup (title, values)
 function SimplePicker (params)
 {
 	var _self = null;
+	var _label = null;
 	var _values = [];
 	var _value = "";
 	var _data = [];
 	var _title = '';
 	var _ppopup = null;
 	
-	var _label = null;
 	var _btn_disclosure = null;
 	
 	var newparams = {};
@@ -171,25 +180,48 @@ function SimplePicker (params)
 	}
 	else
 	{
-		newparams.height = 35;
-		newparams.borderColor = '#9e9e9f';
-		newparams.borderRadius = 5;
-		newparams.backgroundColor = '#fff';
+		if (typeof newparams.height === 'undefined')
+		{
+			newparams.height = 35;		
+		}
+		if (typeof newparams.borderColor === 'undefined')
+		{
+			newparams.borderColor = '#999';		
+		}
+		if (typeof newparams.borderRadius === 'undefined')
+		{
+			newparams.borderRadius = 5;		
+		}
+		if (typeof newparams.backgroundColor === 'undefined')
+		{
+			newparams.backgroundColor = '#fff';		
+		}
+		if (typeof newparams.font === 'undefined')
+		{
+			newparams.font = { fontSize: 16, fontWeight: 'bold' };		
+		}
+		if (typeof newparams.color === 'undefined')
+		{
+			newparams.color = '#385487';		
+		}
+
+		newparams.text = _value;
 	
 		_self = Ti.UI.createView (newparams);
 		
-		_label = Ti.UI.createLabel ({
-			left: 10,
-			top: 8,
-			color: '#385487',
-			font: { fontSize: 16, fontWeight: 'bold' },
-			text: _value
-		});
+		var labelparams = {
+            left: 10,
+            top: 8,
+            color: newparams.color,
+            font: newparams.font,
+            text: _value
+		};
 		
-		var tr = Titanium.UI.create2DMatrix();
+        _label = Ti.UI.createLabel (labelparams);
+			
+		var tr = Ti.UI.create2DMatrix();
 		tr = tr.rotate(90);
 		_btn_disclosure = Ti.UI.createButton ({
-			top: 2,
 			right: 5,
 			style: Ti.UI.iPhone.SystemButton.DISCLOSURE,
 			transform: tr
@@ -198,41 +230,39 @@ function SimplePicker (params)
 		_self.add (_label);
 		_self.add (_btn_disclosure);
 		
-		_ppopup = new PickerPopup (_title, _values);
-		_ppopup.addEventListener ('done', function (e) {
-			if (e.value == _value)
-			{
-				return;
-			}
-
-			_value = e.value;
-			_label.text = _value;
-			
-			_self.fireEvent ('TUchange', e);
-		});
-				
 		_self.addEventListener ('click', function (e) {
+			_ppopup = new PickerPopup (_title, _values);
+			_ppopup.addEventListener ('done', function (e) {
+				if (e.value == _value)
+				{
+					return;
+				}
+	
+				_value = e.value;
+				_label.text = _value;
+				
+				_self.fireEvent ('TUchange', e);
+			});
 
 			_ppopup.xsetValue (_value);
-			_ppopup.slideIn ();
+
+			// will open w/o a nav bar, but no fancy transition
+			//_ppopup.open ();
+
+			// open in modal so you can get a fancy transition, but this necessitates
+			// hiding the navbar
+			_ppopup.open ({
+				modal: true, 
+				navBarHidden:true 
+			});
+			
 		});
-	}
-	
-	
-	_self.addToViews = function (v1, v2)
-	{
-		v1.add (_self);
-		if (_ppopup)
-		{
-			v2.add (_ppopup);
-		}
 	}
 	
 	_self.xgetValue = function ()
 	{
 		return _value;
 	};
-	
 	
 	_self.xsetValue = function (value)
 	{

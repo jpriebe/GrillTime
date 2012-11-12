@@ -19,17 +19,6 @@ function TempsWindow ()
 		_iv_bg = BackgroundManager.getBackgroundIV ();
 		_self.add (_iv_bg);
 	});
-
-	var v = Ti.UI.createView ({
-		top: 0,
-		bottom: 0,
-		left: 0, 
-		right: 0,
-		backgroundColor: '#000',
-		opacity: 0.6,
-		zIndex: 100
-	});
-	_self.add (v);
 		
     var margin = TU.UI.Sizer.getDimension (10);
     var rowh = TU.UI.Sizer.getDimension (50);

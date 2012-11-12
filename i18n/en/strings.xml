@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+	<string name="Timer">Timer</string>
 	<string name="Temps">Temps</string>
 	<string name="Beef">Beef</string>
 	<string name="Ground_Beef">Beef (ground)</string>
@@ -25,4 +26,16 @@
 	<string name="t165deg">165° F</string>
 	<string name="t170deg">170° F</string>
 	<string name="na">n/a</string>	
+	<string name="Temp_Source">Temp. Source</string>
+	<string name="USDA_Temps">USDA Temps</string>
+	<string name="Chefs_Temps">Chefs' Temps</string>
+	<string name="Pause_Timer">Pause Timer</string>
+	<string name="Reset_Timer">Reset Timer</string>
+	<string name="Are_you_sure">Are you sure?</string>
+	<string name="Yes">Yes</string>
+	<string name="No">No</string>
+	<string name="OK">OK</string>
+    <string name="Timer_segment_fmt">Timer segment %1$s</string>
+    <string name="Timer_segment">Timer segment</string>
+	<string name="GrillTime">GrillTime</string>
 </resources>

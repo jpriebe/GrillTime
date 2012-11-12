@@ -22,7 +22,7 @@ $configs = array (
 'android/images/res-notlong-land-hdpi/default.png' => array ('-resize 800x480'),
 
 'iphone/Default.png' => array ('-resize 320x533', '-crop 320x480+0+0'),
-'iphone/Default@2x.png' => array ('-crop 640x960+0+0'),
+'iphone/Default@2x.png' => array ('-resize 640x1066', '-crop 640x960+0+0'),
 );
 
 foreach ($configs as $png => $opt)

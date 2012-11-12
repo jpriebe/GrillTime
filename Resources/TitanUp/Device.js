@@ -1,3 +1,9 @@
+// don't expose these -- internal use only
+var _osname = '';
+var _platformName = '';
+var _dc = null;
+
+// expose these
 var _os = 'unknown';
 var _displayWidth = 0;
 var _displayHeight = 0;
@@ -14,36 +20,67 @@ function Device ()
 {
 }
 
+
 function initialize ()
 {
-    if (Ti.Platform.name === 'iPhone OS')
+    _osname = Ti.Platform.osname;
+    _platformName = Ti.Platform.name;
+    if (_platformName=== 'iPhone OS')
     {
         _os = 'ios';
     }
-    else if (Ti.Platform.name === "android")
+    else if (_platformName === "android")
     {
         _os = 'android';
     }
     
-    var dc = Ti.Platform.displayCaps;
-	
-	_displayWidth = dc.platformWidth;
-	_displayHeight = dc.platformHeight;
-	_density = dc.density;
-	_dpi = dc.dpi;
-	
-	_physicalWidth = _displayWidth / _dpi;
-	_physicalHeight = _displayHeight / _dpi;
-	_screensize = Math.sqrt (_physicalWidth * _physicalWidth + _physicalHeight * _physicalHeight);
-	
-	var osname = Ti.Platform.osname;
-	_isTablet = (osname === 'ipad') 
-		|| ((osname === 'android') && (_screensize >= 6.25));
+    _dc = Ti.Platform.displayCaps;
+	_density = _dc.density;
+	_dpi = _dc.dpi;
+
+
+    function computePhysicalDimensions ()
+    {
+        var densityFactor = 1;
+
+        if (Device.getNativeUnit() == 'dip')
+        {
+            densityFactor = Device.getLogicalDensityFactor ();
+        }
+        
+        _physicalWidth = _displayWidth / _dpi * densityFactor;
+        _physicalHeight = _displayHeight / _dpi * densityFactor;
+
+        Ti.API.debug ('[TU.Device] _physicalWidth: ' + _physicalWidth);
+        Ti.API.debug ('[TU.Device] _physicalHeight: ' + _physicalHeight);
+    }
+
+    function setDisplayDimensions ()
+    {
+		_displayWidth = _dc.platformWidth;
+		_displayHeight = _dc.platformHeight;
 		
-	Ti.API.debug ('[TU.Device] physicalWidth: ' + _physicalWidth);
-	Ti.API.debug ('[TU.Device] physicalHeight: ' + _physicalHeight);
-	Ti.API.debug ('[TU.Device] screensize: ' + _screensize);
-	Ti.API.debug ('[TU.Device] isTablet: ' + (_isTablet) ? 'true' : 'false');
+        Ti.API.debug ('[TU.Device] _displayWidth: ' + _displayWidth);
+        Ti.API.debug ('[TU.Device] _displayHeight: ' + _displayHeight);
+
+		computePhysicalDimensions ();
+    }
+    
+	
+	Ti.Gesture.addEventListener('orientationchange', function(e) {
+		setDisplayDimensions ();
+	});
+
+	setDisplayDimensions ();
+	
+	
+	_screensize = Math.sqrt (_physicalWidth * _physicalWidth + _physicalHeight * _physicalHeight);
+
+	_isTablet = (_osname === 'ipad') 
+		|| ((_osname === 'android') && (_screensize >= 6.25));
+		
+	Ti.API.debug ('[TU.Device] _screensize: ' + _screensize);
+	Ti.API.debug ('[TU.Device] _isTablet: ' + (_isTablet) ? 'true' : 'false');
 	
 	_workingWidth = _displayWidth;
 	_workingHeight = _displayHeight;
@@ -94,6 +131,51 @@ Device.getDpi = function ()
 {
 	return _dpi;
 };
+
+/**
+ * Gets the native display units used on the platform; either 'dip' or 'px'
+ * @return string
+ */
+Device.getNativeUnit = function ()
+{
+    if (_os == 'ios')
+    {
+        return 'dip';
+    }
+    
+    return 'px';
+}
+
+/**
+ * Gets the logical density factor (ratio of pixels to dips)
+ * @return float
+ */
+Device.getLogicalDensityFactor = function ()
+{
+    if (_os == 'android')
+    {
+        return _dc.logicalDensityFactor;
+    }
+    
+    if (_os == 'ios')
+    {
+        // iOS reports platformWidth and platformHeight in dips, but dpi in px,
+        // so we have to compensate for high-density iOS devices; otherwise, we
+        // would get physical sizes like 1" x 1.5"
+        //
+        // Device        Retina       non-Retina
+        // iphone        320dpi       160dpi
+        // ipad          260dpi       130dpi
+        if (((_osname == 'ipad') && (_dpi == 260))
+            || (_dpi == 320))
+        {
+            return 2;
+        }
+    }
+    
+    return 1;
+}
+
 
 /**
  * True if the device is a tablet (either an ipad or an android of screen size > 6.25 inches)
@@ -166,6 +248,7 @@ Device.setWorkingDimensions = function (workingWidth, workingHeight)
 	_workingWidth = workingWidth;
 	_workingHeight = workingHeight;
 }
+
 
 initialize ();
 

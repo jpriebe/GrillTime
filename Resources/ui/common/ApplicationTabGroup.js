@@ -3,10 +3,8 @@ var TU = require ("/TitanUp/TitanUp");
 function ApplicationTabGroup() {
 	var _self = TU.UI.TGWM.createTabGroup ();
 		
-	var win1 = Ti.UI.createWindow ({
-		backgroundColor: '#000',
-		title: 'Timer',
-	});
+	var TimerWindow = require ('/ui/common/TimerWindow');
+	var win1 = new TimerWindow();
 	
 	var tab1 = Ti.UI.createTab({
 		title: L('Timer'),
