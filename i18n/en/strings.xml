@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<string name="Temps">Temps</string>
+	<string name="Beef">Beef</string>
+	<string name="Ground_Beef">Beef (ground)</string>
+	<string name="Lamb">Lamb</string>
+	<string name="Pork">Pork</string>
+	<string name="Ground_Pork">Pork (ground)</string>
+	<string name="Poultry">Poultry</string>
+	<string name="Ground_Poultry">Poultry (ground)</string>
+	<string name="Veal">Veal</string>
+	<string name="Rare">Rare</string>
+	<string name="Medium_Rare">Medium Rare</string>
+	<string name="Medium">Medium</string>
+	<string name="Medium_Well">Medium Well</string>
+	<string name="Well">Well</string>
+	<string name="t125deg">125° F</string>
+	<string name="t130deg">130° F</string>
+	<string name="t135deg">135° F</string>
+	<string name="t140deg">140° F</string>
+	<string name="t145deg">145° F</string>
+	<string name="t150deg">150° F</string>
+	<string name="t155deg">155° F</string>
+	<string name="t160deg">160° F</string>
+	<string name="t165deg">165° F</string>
+	<string name="t170deg">170° F</string>
+	<string name="na">n/a</string>	
+</resources>
