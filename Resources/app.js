@@ -20,11 +20,35 @@ var TU = require ('/TitanUp/TitanUp');
 // This is a single context application with mutliple windows in a stack
 (function() {
 
-    TU.UI.Theme.backgroundColor = '#72A697';
-    TU.UI.Theme.lightBackgroundColor = '#D9B88F';
-    TU.UI.Theme.darkBackgroundColor = '#606C70';
-    TU.UI.Theme.highlightColor = '#A64521';
-    TU.UI.Theme.textColor = '#20272A';
+    TU.UI.Theme.backgroundColor = '#333333';
+    TU.UI.Theme.lightBackgroundColor = '#666666';
+    TU.UI.Theme.darkBackgroundColor = '#000000';
+    TU.UI.Theme.highlightColor = '#fe690b';
+    TU.UI.Theme.textColor = '#ffffff';
+    
+	if (TU.Device.getOS () == 'ios')
+	{
+		var fontname = "Bitter";
+		TU.UI.Theme.fonts = {
+			small: { fontSize: 12, fontFamily: 'Bitter' },
+			medium: { fontSize: 16, fontFamily: 'Bitter' },
+			large: { fontSize: 24, fontFamily: 'Bitter' },
+			smallBold: { fontSize: 12, fontWeight: 'bold', fontFamily: 'Bitter' },
+			mediumBold: { fontSize: 16, fontWeight: 'bold', fontFamily: 'Bitter' },
+			largeBold: { fontSize: 24, fontWeight: 'bold', fontFamily: 'Bitter' },
+		};		
+	}
+	else
+	{
+		TU.UI.Theme.fonts = {
+			small: { fontSize: '12dp', fontFamily: 'Bitter-Regular' },
+			medium: { fontSize: '16dp', fontFamily: 'Bitter-Regular' },
+			large: { fontSize: '24dp', fontFamily: 'Bitter-Regular' },
+			smallBold: { fontSize: '12dp', fontWeight: 'bold', fontFamily: 'Bitter-Bold' },
+			mediumBold: { fontSize: '16dp', fontWeight: 'bold', fontFamily: 'Bitter-Bold' },
+			largeBold: { fontSize: '24dp', fontWeight: 'bold', fontFamily: 'Bitter-Bold' },
+		};
+	}
 	
 	var ApplicationTabGroup = require('ui/common/ApplicationTabGroup');
 	new ApplicationTabGroup().open();

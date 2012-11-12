@@ -1,14 +1,17 @@
 Logfile initialized
 [INFO] logfile = /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build.log
-[DEBUG] /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/builder.py simulator GrillTime /Users/priebe/android-sdks /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime com.smorgasbork.grilltime 6 HVGA /127.0.0.1:59618
+[DEBUG] /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/builder.py simulator GrillTime /Users/priebe/android-sdks /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime com.smorgasbork.grilltime 6 HVGA /127.0.0.1:54832
 [INFO] Building GrillTime for Android ... one moment
-[INFO] Titanium SDK version: 2.1.2 (08/24/12 14:46 ed7f777)
+[INFO] Titanium SDK version: 2.1.1 (07/27/12 14:01 0fd84a2)
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
-[DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.013702 seconds on emulator to get ready
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 15 seconds)
+[DEBUG] waited 15.046531 seconds on emulator to get ready
+[INFO] Waiting for the Android Emulator to become available
 [DEBUG] com.smorgasbork.grilltime installed? True
-[INFO] Fastdev server running, deploying in Fastdev mode
 [INFO] Copying CommonJS modules...
 [INFO] Copying project resources..
 [INFO] Detected change in tiapp.xml, or assets deleted. Forcing full re-build...
@@ -16,8 +19,22 @@ Logfile initialized
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/android/default.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/default.png
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/app.js => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/app.js
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/data/SafeTemps.js => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/data/SafeTemps.js
-[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/KS_nav_ui.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/KS_nav_ui.png
-[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/KS_nav_views.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/KS_nav_views.png
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/fonts/Bitter-Bold.ttf => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/fonts/Bitter-Bold.ttf
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/fonts/Bitter-Regular.ttf => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/fonts/Bitter-Regular.ttf
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/1-port.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/1-port.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/1.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/1.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/2-port.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/2-port.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/2.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/2.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/3-port.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/3-port.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/3.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/3.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/4-port.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/4-port.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/4.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/4.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/5-port.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/5-port.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/5.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/5.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/6-port.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/6-port.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/6.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/6.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/7-port.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/7-port.jpg
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/images/backgrounds/7.jpg => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/images/backgrounds/7.jpg
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/KS_nav_ui.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/KS_nav_ui.png
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/KS_nav_views.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/KS_nav_views.png
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/TitanUp/Device.js => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/TitanUp/Device.js
@@ -33,10 +50,19 @@ Logfile initialized
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/TitanUp/UI/Views/SelectBar.js => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/TitanUp/UI/Views/SelectBar.js
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/TitanUp/UI/Views/SimplePicker.js => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/TitanUp/UI/Views/SimplePicker.js
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/ui/common/ApplicationTabGroup.js => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/ui/common/ApplicationTabGroup.js
+[TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/ui/common/BackgroundManager.js => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/ui/common/BackgroundManager.js
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/ui/common/TempDetailWindow.js => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/ui/common/TempDetailWindow.js
 [TRACE] COPYING CREATED FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/ui/common/TempsWindow.js => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/ui/common/TempsWindow.js
 [TRACE] Generating Java Classes
 [DEBUG] Processing Android resource drawables
+[TRACE] COPYING FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/android/images/res-hdpi/stopwatch.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/res/drawable-hdpi/stopwatch_2313e26532.png
+[TRACE] COPYING FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/android/images/res-hdpi/thermometer.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/res/drawable-hdpi/thermometer_6d642b8f8f.png
+[TRACE] COPYING FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/android/images/res-ldpi/stopwatch.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/res/drawable-ldpi/stopwatch_2313e26532.png
+[TRACE] COPYING FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/android/images/res-ldpi/thermometer.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/res/drawable-ldpi/thermometer_6d642b8f8f.png
+[TRACE] COPYING FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/android/images/res-mdpi/stopwatch.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/res/drawable-mdpi/stopwatch_2313e26532.png
+[TRACE] COPYING FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/android/images/res-mdpi/thermometer.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/res/drawable-mdpi/thermometer_6d642b8f8f.png
+[TRACE] COPYING FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/android/images/res-xhdpi/stopwatch.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/res/drawable-xhdpi/stopwatch_2313e26532.png
+[TRACE] COPYING FILE: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/Resources/android/images/res-xhdpi/thermometer.png => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/res/drawable-xhdpi/thermometer_6d642b8f8f.png
 [DEBUG] app stylesheet => /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/gen/com/smorgasbork/grilltime/ApplicationStylesheet.java
 [DEBUG] copying app icon: /Users/priebe/Documents/Titanium_Studio_Workspace/GrillTime/build/android/bin/assets/Resources/appicon.png
 [DEBUG] generating theme.xml
@@ -85,9 +111,24 @@ Logfile initialized
 [DEBUG] from resource zip => assets/Resources/TitanUp/README
 [DEBUG] from resource zip => assets/Resources/TitanUp/TitanUp.js
 [DEBUG] from resource zip => assets/Resources/data/SafeTemps.js
-[DEBUG] from resource zip => assets/Resources/images/KS_nav_ui.png
-[DEBUG] from resource zip => assets/Resources/images/KS_nav_views.png
+[DEBUG] from resource zip => assets/Resources/fonts/Bitter-Bold.ttf
+[DEBUG] from resource zip => assets/Resources/fonts/Bitter-Regular.ttf
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/1-port.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/1.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/2-port.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/2.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/3-port.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/3.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/4-port.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/4.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/5-port.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/5.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/6-port.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/6.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/7-port.jpg
+[DEBUG] from resource zip => assets/Resources/images/backgrounds/7.jpg
 [DEBUG] from resource zip => assets/Resources/ui/common/ApplicationTabGroup.js
+[DEBUG] from resource zip => assets/Resources/ui/common/BackgroundManager.js
 [DEBUG] from resource zip => assets/Resources/ui/common/TempDetailWindow.js
 [DEBUG] from resource zip => assets/Resources/ui/common/TempsWindow.js
 [DEBUG] from resource zip => assets/Resources/KS_nav_ui.png
@@ -100,18 +141,17 @@ Logfile initialized
 [DEBUG] from resource zip => assets/tiapp.xml
 [DEBUG] from resource zip => res/drawable/appicon.png
 [DEBUG] from resource zip => res/drawable/background.png
-[DEBUG] from resource zip => res/drawable/close.png
-[DEBUG] from resource zip => res/drawable/facebook_login.png
-[DEBUG] from resource zip => res/drawable/facebook_login_down.png
-[DEBUG] from resource zip => res/drawable/facebook_login_wide.png
-[DEBUG] from resource zip => res/drawable/facebook_login_wide_down.png
-[DEBUG] from resource zip => res/drawable/facebook_logout.png
-[DEBUG] from resource zip => res/drawable/facebook_logout_down.png
 [DEBUG] from resource zip => res/layout/titanium_tabgroup.xml
 [DEBUG] from resource zip => AndroidManifest.xml
 [DEBUG] from resource zip => resources.arsc
-[DEBUG] from resource zip => res/drawable-hdpi/close.png
-[DEBUG] from resource zip => res/drawable-ldpi/close.png
+[DEBUG] from resource zip => res/drawable-hdpi/stopwatch_2313e26532.png
+[DEBUG] from resource zip => res/drawable-hdpi/thermometer_6d642b8f8f.png
+[DEBUG] from resource zip => res/drawable-ldpi/stopwatch_2313e26532.png
+[DEBUG] from resource zip => res/drawable-ldpi/thermometer_6d642b8f8f.png
+[DEBUG] from resource zip => res/drawable-mdpi/stopwatch_2313e26532.png
+[DEBUG] from resource zip => res/drawable-mdpi/thermometer_6d642b8f8f.png
+[DEBUG] from resource zip => res/drawable-xhdpi/stopwatch_2313e26532.png
+[DEBUG] from resource zip => res/drawable-xhdpi/thermometer_6d642b8f8f.png
 [DEBUG] from resource zip => res/drawable-long-land-hdpi/background.png
 [DEBUG] from resource zip => res/drawable-long-land-ldpi/background.png
 [DEBUG] from resource zip => res/drawable-long-port-hdpi/background.png
@@ -122,37 +162,33 @@ Logfile initialized
 [DEBUG] from resource zip => res/drawable-notlong-port-hdpi/background.png
 [DEBUG] from resource zip => res/drawable-notlong-port-ldpi/background.png
 [DEBUG] from resource zip => res/drawable-notlong-port-mdpi/background.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/thirdparty.jar => org/apache/Commons-NOTICE.txt
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/thirdparty.jar => org/apache/HttpComponents-NOTICE.txt
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/thirdparty.jar => org/apache/mime4j-NOTICE.txt
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/modules/titanium-facebook.jar => ti/modules/titanium/facebook/LICENSE
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/build.properties
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/background.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/polling.js
-[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/polling.min.js
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/polling.js
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/polling.min.js
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/build.properties
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/background.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
+[DEBUG] from JAR /Users/priebe/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
 [DEBUG] installing native SDK libs
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.012494 seconds on emulator to get ready
+[DEBUG] waited 0.013085 seconds on emulator to get ready
 [INFO] Installing application on emulator
 [INFO] Launching application ... GrillTime
-[TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.smorgasbork.grilltime/.GrilltimeActivity }
+[TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.smorgasbork.grilltime/.GrilltimeActivity }
 
 [INFO] Deployed GrillTime ... Application should be running.
-[INFO] Forwarding host port 59618 to device for debugging.
-[INFO] Android Emulator has exited
+[INFO] Forwarding host port 54832 to device for debugging.
+[DEBUG] signal caught: 15

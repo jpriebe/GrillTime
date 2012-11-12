@@ -1,18 +1,38 @@
 var TU = require ('/TitanUp/TitanUp');
+var BackgroundManager = require ('/ui/common/BackgroundManager');
 
 function TempsWindow ()
 {
 	var _self = null;
 	var _tv_menu = null;
+	var _iv_bg = null;
 	
 	_self = Ti.UI.createWindow ({
-		title: L('Temps'),
-		backgroundColor: TU.UI.Theme.backgroundColor
+		title: L('Temps')
 	});
 	
+	_iv_bg = BackgroundManager.getBackgroundIV ();
+	_self.add (_iv_bg);
 	
+	Ti.Gesture.addEventListener('orientationchange', function(e) {
+		_self.remove (_iv_bg);
+		_iv_bg = BackgroundManager.getBackgroundIV ();
+		_self.add (_iv_bg);
+	});
+
+	var v = Ti.UI.createView ({
+		top: 0,
+		bottom: 0,
+		left: 0, 
+		right: 0,
+		backgroundColor: '#000',
+		opacity: 0.6,
+		zIndex: 100
+	});
+	_self.add (v);
+		
     var margin = TU.UI.Sizer.getDimension (10);
-    var rowh = TU.UI.Sizer.getDimension (40);
+    var rowh = TU.UI.Sizer.getDimension (50);
 
     _tv_menu = Ti.UI.createTableView ({
         top: margin,
@@ -21,10 +41,12 @@ function TempsWindow ()
         bottom: margin,
         borderRadius: margin,
         borderColor: TU.UI.Theme.textColor,
-        backgroundColor: TU.UI.Theme.lightBackgroundColor
+        separatorColor: TU.UI.Theme.textColor,
+        backgroundColor: 'transparent',
+        zIndex: 200        
     });
     
-    var rows = [];
+    var rows = []; 
     
     var temps = require ('/data/SafeTemps').temps;
     for (var i = 0; i < temps.length; i++)
@@ -33,8 +55,8 @@ function TempsWindow ()
     		title: temps[i].label,
     		height: rowh,
     		color: TU.UI.Theme.textColor,
-    		backgroundColor: TU.UI.Theme.lightBackgroundColor,
-    		selectedBackgroundColor: TU.UI.Theme.highlightColor
+    		selectedBackgroundColor: TU.UI.Theme.highlightColor,
+    		font: TU.UI.Theme.fonts.mediumBold
     	});
     	r.data = temps[i].temps;
     	

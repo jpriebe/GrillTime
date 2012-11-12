@@ -7,7 +7,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>2.1.2.GA</sdk-version>
+    <sdk-version>2.1.1.GA</sdk-version>
     <id>com.smorgasbork.grilltime</id>
     <name>GrillTime</name>
     <version>1.0</version>
@@ -25,9 +25,13 @@
     <analytics>true</analytics>
     <guid>03257e44-5a3d-420f-8c25-4bb783841d8b</guid>
     <property name="ti.ui.defaultunit">system</property>
+    <property name="ti.android.fastdev" type="bool">false</property>
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
         </orientations>
         <orientations device="ipad">
             <orientation>Ti.UI.PORTRAIT</orientation>
