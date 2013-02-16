@@ -7,7 +7,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>2.1.3.GA</sdk-version>
+    <sdk-version>2.1.4.GA</sdk-version>
     <id>com.smorgasbork.grilltime</id>
     <name>GrillTime</name>
     <version>1.0</version>
@@ -22,10 +22,11 @@
     <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
-    <analytics>true</analytics>
+    <analytics>false</analytics>
     <guid>03257e44-5a3d-420f-8c25-4bb783841d8b</guid>
     <property name="ti.ui.defaultunit">system</property>
     <property name="ti.android.fastdev" type="bool">false</property>
+    <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
@@ -45,8 +46,12 @@
         <services>
             <service type="interval" url="BackgroundNotification.js"/>
         </services>
-        <manifest>
-            <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <manifest android:installLocation="auto">
+            <!-- don't use this until Ti SDK shows icons properly for holo theme; also,
+                 there's a weird title bar above the tabs -->
+            <!-- also be sure to comment out of platform/android/AndroidManifest.xml -->
+            <!-- uses-sdk android:minSdkVersion="7" android:targetSdkVersion="11"/ -->
+            <uses-permission android:name="android.permission.WAKE_LOCK"/>
             <application>
                 <receiver android:name="bencoding.alarmmanager.AlarmNotificationListener"/>
                 <receiver android:name="bencoding.alarmmanager.AlarmServiceListener"/>
