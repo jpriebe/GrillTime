@@ -1,6 +1,5 @@
 var _idx = parseInt ((Math.random() * 7)) + 1;
 
-
 function BackgroundManager ()
 {
 	

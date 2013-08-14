@@ -12,8 +12,8 @@ function TempDetailWindow (detail)
 	
     var margin = TU.UI.Sizer.getDimension (10);
     var rowh = TU.UI.Sizer.getDimension (50);	
-	var btnw = TU.UI.Sizer.getDimensionExact (30, 30, 60, 60);
-	var btnh = TU.UI.Sizer.getDimensionExact (30, 30, 60, 60);	
+	var btnw = TU.UI.Sizer.getDimensionExact (30, 45, 60, 90, 135);
+	var btnh = TU.UI.Sizer.getDimensionExact (30, 45, 60, 90, 135);	
 	
 	_self = Ti.UI.createWindow ({
 		title: detail.label

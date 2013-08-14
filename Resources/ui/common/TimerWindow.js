@@ -59,8 +59,8 @@ function TimerWindow ()
 	});
 	
 	var margin = TU.UI.Sizer.getDimension (10);
-	var btnw = TU.UI.Sizer.getDimensionExact (45, 45, 90, 90);
-	var btnh = TU.UI.Sizer.getDimensionExact (45, 45, 90, 90);	
+	var btnw = TU.UI.Sizer.getDimensionExact (45, 60, 90, 120, 180);
+	var btnh = TU.UI.Sizer.getDimensionExact (45, 60, 90, 120, 180);	
 	
     Ti.Gesture.addEventListener('orientationchange', function(e) {
         createUI ();
@@ -607,6 +607,11 @@ function TimerWindow ()
 	
 	function setButtonEnabled (btn, enabled)
 	{
+	    if (btn == null)
+	    {
+	        return;
+	    }
+	    
 	    if (enabled)
 	    {
 	        btn.setEnabled (true);
@@ -831,6 +836,8 @@ function TimerWindow ()
         _self.add (_vbuttons);
 	}	
 	
+    createUI ();
+    
     if (_alarmData != null)
     {
         Ti.API.debug ("app launching; found active alarmData");
@@ -850,8 +857,6 @@ function TimerWindow ()
         }
     }
 
-    createUI ();
-    
 	return _self;
 }
 

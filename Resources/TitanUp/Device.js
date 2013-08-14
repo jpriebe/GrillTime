@@ -35,8 +35,21 @@ function initialize ()
     }
     
     _dc = Ti.Platform.displayCaps;
-	_density = _dc.density;
-	_dpi = _dc.dpi;
+    _density = _dc.density;
+    
+    // bug in Ti SDK 3.1.x; identifies the Samsung Galaxy S4 as 
+    // a 'medium' density display
+    // https://jira.appcelerator.org/browse/TIMOB-14553
+    if ((Ti.Platform.manufacturer == 'samsung') && (Ti.Platform.model == 'SCH-I545'))
+    {
+        if (_density == 'medium')
+        {
+            _density = 'xxhigh';
+        }
+    }
+    
+    
+    _dpi = _dc.dpi;
 
 
     function computePhysicalDimensions ()
@@ -57,33 +70,33 @@ function initialize ()
 
     function setDisplayDimensions ()
     {
-		_displayWidth = _dc.platformWidth;
-		_displayHeight = _dc.platformHeight;
-		
+        _displayWidth = _dc.platformWidth;
+        _displayHeight = _dc.platformHeight;
+        
         Ti.API.debug ('[TU.Device] _displayWidth: ' + _displayWidth);
         Ti.API.debug ('[TU.Device] _displayHeight: ' + _displayHeight);
 
-		computePhysicalDimensions ();
+        computePhysicalDimensions ();
     }
     
-	
-	Ti.Gesture.addEventListener('orientationchange', function(e) {
-		setDisplayDimensions ();
-	});
+    
+    Ti.Gesture.addEventListener('orientationchange', function(e) {
+        setDisplayDimensions ();
+    });
 
-	setDisplayDimensions ();
-	
-	
-	_screensize = Math.sqrt (_physicalWidth * _physicalWidth + _physicalHeight * _physicalHeight);
+    setDisplayDimensions ();
+    
+    
+    _screensize = Math.sqrt (_physicalWidth * _physicalWidth + _physicalHeight * _physicalHeight);
 
-	_isTablet = (_osname === 'ipad') 
-		|| ((_osname === 'android') && (_screensize >= 6.25));
-		
-	Ti.API.debug ('[TU.Device] _screensize: ' + _screensize);
-	Ti.API.debug ('[TU.Device] _isTablet: ' + (_isTablet) ? 'true' : 'false');
-	
-	_workingWidth = _displayWidth;
-	_workingHeight = _displayHeight;
+    _isTablet = (_osname === 'ipad') 
+        || ((_osname === 'android') && (_screensize >= 6.25));
+        
+    Ti.API.debug ('[TU.Device] _screensize: ' + _screensize);
+    Ti.API.debug ('[TU.Device] _isTablet: ' + (_isTablet) ? 'true' : 'false');
+    
+    _workingWidth = _displayWidth;
+    _workingHeight = _displayHeight;
 }
 
 
@@ -93,7 +106,7 @@ function initialize ()
  */
 Device.getOS = function ()
 {
-	return _os;
+    return _os;
 };
 
 /**
@@ -102,7 +115,7 @@ Device.getOS = function ()
  */
 Device.getDisplayWidth = function ()
 {
-	return _displayWidth;
+    return _displayWidth;
 };
 
 /**
@@ -111,7 +124,7 @@ Device.getDisplayWidth = function ()
  */
 Device.getDisplayHeight = function ()
 {
-	return _displayHeight;
+    return _displayHeight;
 };
 
 /**
@@ -120,7 +133,7 @@ Device.getDisplayHeight = function ()
  */
 Device.getDensity = function ()
 {
-	return _density;
+    return _density;
 };
 
 /**
@@ -129,7 +142,7 @@ Device.getDensity = function ()
  */
 Device.getDpi = function ()
 {
-	return _dpi;
+    return _dpi;
 };
 
 /**
@@ -183,7 +196,7 @@ Device.getLogicalDensityFactor = function ()
  */
 Device.getIsTablet = function ()
 {
-	return _isTablet;
+    return _isTablet;
 };
 
 /**
@@ -192,7 +205,7 @@ Device.getIsTablet = function ()
  */
 Device.getPhysicalWidth = function ()
 {
-	return _physicalWidth;
+    return _physicalWidth;
 };
 
 /**
@@ -201,7 +214,7 @@ Device.getPhysicalWidth = function ()
  */
 Device.getPhysicalHeight = function ()
 {
-	return _physicalHeight;
+    return _physicalHeight;
 };
 
 /**
@@ -210,7 +223,7 @@ Device.getPhysicalHeight = function ()
  */
 Device.getScreensize = function ()
 {
-	return _screensize;
+    return _screensize;
 };
 
 /**
@@ -222,7 +235,7 @@ Device.getScreensize = function ()
  */
 Device.getWorkingWidth = function ()
 {
-	return _workingWidth;
+    return _workingWidth;
 };
 
 /**
@@ -234,7 +247,7 @@ Device.getWorkingWidth = function ()
  */
 Device.getWorkingHeight = function ()
 {
-	return _workingHeight;
+    return _workingHeight;
 };
 
 /**
@@ -245,8 +258,8 @@ Device.getWorkingHeight = function ()
  */
 Device.setWorkingDimensions = function (workingWidth, workingHeight)
 {
-	_workingWidth = workingWidth;
-	_workingHeight = workingHeight;
+    _workingWidth = workingWidth;
+    _workingHeight = workingHeight;
 }
 
 
