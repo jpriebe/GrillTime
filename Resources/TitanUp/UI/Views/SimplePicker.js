@@ -1,123 +1,167 @@
 var TU = null;
 
 /**
- * A class that makes a simple cross-platform picker.  On Android, it is a standard drop-down.
- * On iOS, it is a button that brings up a popup picker.
+ * A class that makes a simple cross-platform picker.
  * 
- * Fires event: 'TUchange' (note, not 'change' like the standard picker); event object contains
- * a single property, 'value'
+ * Fires event: 'change' event object contains properties 'value', 'caption', and 'index'
  */
 
-function PickerPopup (title, values)
+var _os = '';
+
+function PickerPopup (bgcolor, highlight_bgcolor, color, highlight_color, values, selected_value)
 {
 	var _self = null;
+    var _content_view = null;
 	var _values = values;
 	var _value = '';
 	var _selidx = -1;
-	
-	var _tvValues = null;
-	var _btnCancel = null;
-	var _btnDone = null;
-	var _toolbar = null;
-	
-	_self = Ti.UI.createWindow({
-		backgroundColor: TU.UI.Theme.lightBackgroundColor,
-		layout: 'vertical'
-	});
- 
-	_btnCancel =  Ti.UI.createButton({
-		title: 'Cancel',
-		height: 25,
-		top: 2,
-		left: 20,
-		style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
-	});
- 
-	_btnDone =  Ti.UI.createButton({
-		title: 'Done',
-		height: 25,
-		top: 2,
-		right: 20,
-		style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
-	});
-	
-	var spacer =  Ti.UI.createButton({
-		systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-	});	
 
- 	_toolbar = Ti.UI.iOS.createToolbar ({
- 		items: [_btnCancel, spacer, _btnDone],
-		backgroundColor:'#777',
-		top: 0,
-		borderTop: false,
-		borderBottom: true
+    var _rowheight = 48;
+
+	var _sv = null;
+    var _rows = null;
+	var _btn_cancel = null;
+
+	var params = {
+		backgroundColor: '#fff',
+        width: '80%',
+        height: '80%',
+        borderRadius: 8
+	};
+
+    _content_view = Ti.UI.createView (params);
+
+	_btn_cancel =  Ti.UI.createButton({
+		title: 'Cancel',
+		height: 40,
+		bottom: 8
 	});
-	
-	_self.add (_toolbar);
-	
-	var data = [];
+
+    _btn_cancel.addEventListener('click', function (e) {
+        _self.fireEvent ('cancel', {});
+    });
+
+    function build_row (i)
+    {
+        // a couple of things about TableViews and TableViewRows make them unsuitable for use here,
+        // so we are rolling our own "poor man's tableview"
+        // - android and ios have inconsistent names for the color of a row that is being touched
+        // - android doesn't let you set the color of the text in a row that is being touched
+        // - android doesn't implement TableViewRow.setColor()
+
+        var row = Ti.UI.createView ({
+            top: 0,
+            left: 0,
+            right: 0,
+            height: _rowheight,
+            backgroundColor: bgcolor
+        });
+
+        var l = Ti.UI.createLabel ({
+            left: 8,
+            text: _values[i],
+            color: color,
+            font: TU.UI.Theme.fonts.medium
+        });
+
+        row.add (l);
+
+        row.label = l;
+        row.index = i;
+
+        row.addEventListener ('touchstart', function (e) {
+            row.setBackgroundColor (highlight_bgcolor);
+            row.label.setColor (highlight_color);
+        });
+
+        row.addEventListener ('touchcancel', function (e) {
+            row.setBackgroundColor (bgcolor);
+            row.label.setColor (color);
+        });
+
+        row.addEventListener ('touchend', function (e) {
+            row.setBackgroundColor (bgcolor);
+            row.label.setColor (color);
+        });
+
+        row.addEventListener ('click', function (e) {
+            var v = _values[row.index];
+            _value = v;
+            _self.fireEvent ('done', { index: row.index, value: v });
+        });
+
+        return row;
+    }
+
+    _sv = Ti.UI.createScrollView ({
+        top: 8,
+        left: 8,
+        right: 8,
+        bottom: 56,
+        backgroundColor: bgcolor,
+        layout: 'vertical'
+    });
+
+    _rows = [];
 	for (var i = 0; i < _values.length; i++)
 	{
-		data.push ({title: _values[i]});
-	}
-	
-	var v = Ti.UI.createView ({
-	   left: 0,
-	   right: 0,
-	   bottom: 0,
-	   height: Ti.UI.FILL	    
-	});
+        var row = build_row (i);
+        _rows.push (row);
 
-	_tvValues = Ti.UI.createTableView ({
-		data: data,
-		borderWidth: 1,
-		borderColor: '#000',
-		borderRadius: 5,
-		top: 5,
-		left: 5,
-		right: 5,
-		bottom: 5,
-		allowSelection: true
-	});
-	
-	_tvValues.addEventListener ('click', function (e) {
-		_self.xsetValue (_values[e.index]);
-	});
-	
-	_self.add (v);
-	v.add (_tvValues);
-	
-	_btnDone.addEventListener('click', function (e) {
-		_self.fireEvent ('done', { value: _value });
-		_self.close ();
-	});
-	
-	_btnCancel.addEventListener('click', function (e) {
-		_self.close ();
-	});
-	
-	_self.xsetValue = function (value)
+        _sv.add (row);
+	}
+
+    _content_view.add (_sv);
+    _content_view.add (_btn_cancel);
+
+    _self = TU.UI.createModalView ({
+        view: _content_view
+    });
+
+    _self.xsetValue = setValue;
+
+    return _self;
+
+    function setValue (value)
 	{
-		if (_selidx > -1)
-		{
-			_tvValues.deselectRow (_selidx);
-		}
-		
+        if (_selidx > -1)
+        {
+            _rows[_selidx].setBackgroundColor ('transparent');
+            _rows[_selidx].label.setColor (color);
+        }
+
 	    for (var i = 0; i < _values.length; i++)
 	    {
-	        if (_values[i] == value)
+	        if (_values[i] === value)
 	        {
 	        	_selidx = i;
-	            _tvValues.selectRow (_selidx);
-	            _tvValues.scrollToIndex (_selidx);
-	            break;
+                _rows[i].setBackgroundColor (highlight_bgcolor);
+                _rows[i].label.setColor (highlight_color);
+
+                var scrollheight = _rowheight * (_selidx - 2);
+                if (scrollheight < 0)
+                {
+                    scrollheight = 0;
+                }
+
+                if (_os === 'android')
+                {
+                    // https://jira.appcelerator.org/browse/TIMOB-17954
+                    // scrollTo needs units in px
+                    scrollheight = TU.UI.Sizer.dpToPx(scrollheight);
+                    _sv.scrollTo (0, scrollheight);
+                }
+                if (_os === 'ios')
+                {
+                    _sv.setContentOffset ({ x: 0, y: scrollheight },  { animated:false } );
+                }
+                break;
 	        }
 	    }
 
 		_value = value;
 	}
 	
-	return _self;
 }
 
 
@@ -127,138 +171,137 @@ function SimplePicker (params)
 	var _label = null;
 	var _values = [];
 	var _value = "";
-	var _data = [];
-	var _title = '';
 	var _ppopup = null;
-	
-	var _btn_disclosure = null;
+    var _parent = null; // this is the parent view to which we attach the popup
+    var _highlight_bgcolor = TU.UI.Theme.highlightColor;
+    var _highlight_color = TU.UI.Theme.lightTextColor;
 	
 	var newparams = {};
 	
 	for (var k in params)
 	{
-		if (k == 'values')
+		if (k === 'values')
 		{
 			_values = params[k];
 			continue;
 		}
-		if (k == 'title')
-		{
-			_title = params[k];
-			continue;
-		}
-		
+
+        if (k === 'parent')
+        {
+            _parent = params[k];
+            continue;
+        }
+
+        if (k === 'highlight_color')
+        {
+            _highlight_color = params[k];
+            continue;
+        }
+
+        if (k === 'highlight_bgcolor')
+        {
+            _highlight_bgcolor = params[k];
+            continue;
+        }
+
 		newparams[k] = params[k];
 	}
-	
+
+    if ((_parent === null)
+        || ((_parent.getLayout () !== 'composite') && (typeof _parent.getLayout () !== 'undefined')))
+    {
+        throw {
+            message: 'Error: you must specify a parent view in params.parent, and the parent view must have a layout of "composite"'
+        };
+    }
+
 	if (_values.length > 0)
 	{
 		_value = _values[0];
 	}
 
-	for (var i = 0; i < _values.length; i++)
-	{
-		_data.push (Ti.UI.createPickerRow({title: _values[i]}));
-	}	
+    if (typeof newparams.height === 'undefined')
+    {
+        newparams.height = 35;
+    }
+    if (typeof newparams.borderColor === 'undefined')
+    {
+        newparams.borderColor = TU.UI.Theme.mediumBackgroundColor;
+    }
+    if (typeof newparams.borderRadius === 'undefined')
+    {
+        newparams.borderRadius = 5;
+    }
+    if (typeof newparams.backgroundColor === 'undefined')
+    {
+        newparams.backgroundColor = TU.UI.Theme.lightBackgroundColor;
+    }
+    if (typeof newparams.font === 'undefined')
+    {
+        newparams.font = TU.UI.Theme.fonts.medium;
+    }
+    if (typeof newparams.color === 'undefined')
+    {
+        newparams.color = TU.UI.Theme.darkTextColor;
+    }
 
-	if (TU.Device.getOS () == 'android')
-	{
-		if (typeof newparams.backgroundColor != "undefined")
-		{
-			// don't set a background color on android; that will remove the "control look" of
-			// the picker...
-			delete newparams.backgroundColor;
-		}
-		Ti.API.debug ('[SimplePicker] newparams: ' + JSON.stringify (newparams));
-		
-		_self = Ti.UI.createPicker (newparams);
-		_self.addEventListener ('change', function (e) {
-			_value = e.selectedValue[0];
-			_self.fireEvent ('TUchange', { value: _value })
-		});
-		_self.add (_data);
-	}
-	else
-	{
-		if (typeof newparams.height === 'undefined')
-		{
-			newparams.height = 35;		
-		}
-		if (typeof newparams.borderColor === 'undefined')
-		{
-			newparams.borderColor = '#999';		
-		}
-		if (typeof newparams.borderRadius === 'undefined')
-		{
-			newparams.borderRadius = 5;		
-		}
-		if (typeof newparams.backgroundColor === 'undefined')
-		{
-			newparams.backgroundColor = '#fff';		
-		}
-		if (typeof newparams.font === 'undefined')
-		{
-			newparams.font = { fontSize: 16, fontWeight: 'bold' };		
-		}
-		if (typeof newparams.color === 'undefined')
-		{
-			newparams.color = '#385487';		
-		}
+    newparams.text = _value;
 
-		newparams.text = _value;
-	
-		_self = Ti.UI.createView (newparams);
-		
-		var labelparams = {
-            left: 10,
-            top: 8,
-            color: newparams.color,
-            font: newparams.font,
-            text: _value
-		};
-		
-        _label = Ti.UI.createLabel (labelparams);
-			
-		var tr = Ti.UI.create2DMatrix();
-		tr = tr.rotate(90);
-		_btn_disclosure = Ti.UI.createButton ({
-			right: 5,
-			style: Ti.UI.iPhone.SystemButton.DISCLOSURE,
-			transform: tr
-		});
-		
-		_self.add (_label);
-		_self.add (_btn_disclosure);
-		
-		_self.addEventListener ('click', function (e) {
-			_ppopup = new PickerPopup (_title, _values);
-			_ppopup.addEventListener ('done', function (e) {
-				if (e.value == _value)
-				{
-					return;
-				}
-	
-				_value = e.value;
-				_label.text = _value;
-				
-				_self.fireEvent ('TUchange', e);
-			});
+    _self = Ti.UI.createView (newparams);
 
-			_ppopup.xsetValue (_value);
+    var labelparams = {
+        left: 10,
+        color: newparams.color,
+        font: newparams.font,
+        text: _value
+    };
 
-			// will open w/o a nav bar, but no fancy transition
-			//_ppopup.open ();
+    _label = Ti.UI.createLabel (labelparams);
 
-			// open in modal so you can get a fancy transition, but this necessitates
-			// hiding the navbar
-			_ppopup.open ({
-				modal: true, 
-				navBarHidden:true 
-			});
-			
-		});
-	}
-	
+    var btnparams = {
+        right: 10,
+        color: newparams.color,
+        font: newparams.font,
+        text: "▼"
+    };
+
+    var btn = Ti.UI.createLabel (btnparams);
+
+    _self.add (_label);
+    _self.add (btn);
+
+    _self.addEventListener ('click', function (e) {
+        if (_ppopup !== null)
+        {
+            _parent.add (_ppopup);
+            _ppopup.xsetValue (_value);
+            return;
+        }
+
+        _ppopup = new PickerPopup (newparams.backgroundColor, _highlight_bgcolor, newparams.color, _highlight_color, _values, _value);
+
+        _ppopup.addEventListener ('cancel', function (e) {
+            _parent.remove (_ppopup);
+        });
+
+        _ppopup.addEventListener ('done', function (e) {
+            _parent.remove (_ppopup);
+
+            if (e.value === _value)
+            {
+                return;
+            }
+
+            _value = e.value;
+            _label.text = _value;
+
+            _self.fireEvent ('change', e);
+        });
+
+        _parent.add (_ppopup);
+        _ppopup.xsetValue (_value);
+    });
+
 	_self.xgetValue = function ()
 	{
 		return _value;
@@ -268,17 +311,10 @@ function SimplePicker (params)
 	{
 		for (var i = 0; i < _values.length; i++)
 		{
-			if (_values[i] == value)
+			if (_values[i] === value)
 			{
 				_value = value;
-				if (TU.Device.getOS () == 'android')
-				{
-					_self.setSelectedRow (0, i, false);
-				}
-				else
-				{
-					_label.text = _value;
-				}
+    			_label.text = _value;
 			}
 		}
 	};
@@ -290,6 +326,8 @@ function SimplePicker (params)
 SimplePicker.TUInit = function (tu)
 {
 	TU = tu;
+
+    _os = TU.Device.getOS();
 };
 
 

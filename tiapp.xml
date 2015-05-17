@@ -1,73 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <deployment-targets>
-        <target device="tizen">false</target>
-        <target device="mobileweb">false</target>
-        <target device="iphone">true</target>
-        <target device="ipad">false</target>
-        <target device="android">true</target>
-        <target device="blackberry">false</target>
-    </deployment-targets>
-    <sdk-version>3.1.1.GA</sdk-version>
     <id>com.smorgasbork.grilltime</id>
     <name>GrillTime</name>
     <version>1.0</version>
     <publisher>priebe</publisher>
-    <url>http://smorgasbork.com/</url>
-    <description>not specified</description>
-    <copyright>2012 by priebe</copyright>
+    <url>http://www.smorgasbork.com/</url>
+    <description>undefined</description>
+    <copyright>2015 by priebe</copyright>
     <icon>appicon.png</icon>
-    <persistent-wifi>false</persistent-wifi>
-    <prerendered-icon>false</prerendered-icon>
-    <statusbar-style>default</statusbar-style>
-    <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>false</analytics>
-    <guid>03257e44-5a3d-420f-8c25-4bb783841d8b</guid>
-    <property name="ti.ui.defaultunit">system</property>
-    <property name="ti.android.fastdev" type="bool">false</property>
-    <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
-    <iphone>
-        <orientations device="iphone">
-            <orientation>Ti.UI.PORTRAIT</orientation>
-            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
-            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
-            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
-        </orientations>
-        <orientations device="ipad">
-            <orientation>Ti.UI.PORTRAIT</orientation>
-            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
-            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
-            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
-        </orientations>
-    </iphone>
+    <guid>bce8173a-7b85-4989-a9c1-7c141709fa52</guid>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
+    <ios>
+        <plist>
+            <dict>
+                <key>UISupportedInterfaceOrientations~iphone</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                </array>
+                <key>UISupportedInterfaceOrientations~ipad</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+                    <string>UIInterfaceOrientationLandscapeLeft</string>
+                    <string>UIInterfaceOrientationLandscapeRight</string>
+                </array>
+                <key>UIRequiresPersistentWiFi</key>
+                <false/>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+                <key>UIStatusBarHidden</key>
+                <false/>
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleDefault</string>
+            </dict>
+        </plist>
+    </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <!-- the services tag must be added so that our service will run -->
         <services>
             <service type="interval" url="BackgroundNotification.js"/>
         </services>
-        <manifest android:installLocation="auto">
-            <!-- don't use this until Ti SDK shows icons properly for holo theme; also,
-                 there's a weird title bar above the tabs -->
-            <!-- also be sure to comment out of platform/android/AndroidManifest.xml -->
-            <!-- uses-sdk android:minSdkVersion="7" android:targetSdkVersion="11"/ -->
-            <uses-permission android:name="android.permission.WAKE_LOCK"/>
-            <application>
+        <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.smorgasbork.grilltime" android:versionCode="1" android:versionName="1.0">
+            <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="21"/>
+            <application android:icon="@drawable/appicon" android:label="GrillTime" android:name="GrilltimeApplication" android:debuggable="false" android:theme="@style/Theme.AppCompat">
+                <activity android:name=".GrilltimeActivity" android:label="@string/app_name" android:theme="@style/Theme.Titanium" android:configChanges="keyboardHidden|orientation|screenSize">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN"/>
+                        <category android:name="android.intent.category.LAUNCHER"/>
+                    </intent-filter>
+                </activity>
+                <activity android:name="org.appcelerator.titanium.TiActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
+                <activity android:name="org.appcelerator.titanium.TiTranslucentActivity" android:configChanges="keyboardHidden|orientation|screenSize" android:theme="@style/Theme.AppCompat.Translucent"/>
+                <activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:configChanges="screenSize"/>
+                <service android:name="com.smorgasbork.grilltime.BackgroundNotificationService"/>
                 <receiver android:name="bencoding.alarmmanager.AlarmNotificationListener"/>
                 <receiver android:name="bencoding.alarmmanager.AlarmServiceListener"/>
             </application>
+            <uses-permission android:name="android.permission.WAKE_LOCK"/>
+            <uses-permission android:name="android.permission.VIBRATE"/>
         </manifest>
     </android>
-    <mobileweb>
-        <precache/>
-        <splash>
-            <enabled>true</enabled>
-            <inline-css-images>true</inline-css-images>
-        </splash>
-        <theme>default</theme>
-    </mobileweb>
     <modules>
-        <module platform="android" version="0.5">bencoding.alarmmanager</module>
+        <module platform="android">bencoding.alarmmanager</module>
+        <module platform="iphone">bencoding.localnotify</module>
     </modules>
+    <deployment-targets>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+        <target device="ipad">true</target>
+        <target device="iphone">true</target>
+        <target device="mobileweb">false</target>
+    </deployment-targets>
+    <sdk-version>3.5.1.GA</sdk-version>
 </ti:app>

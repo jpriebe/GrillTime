@@ -34,7 +34,7 @@ if (idx < alarmData.times.length)
         service: 'com.smorgasbork.grilltime.BackgroundNotificationService'
     });
 
-    Ti.API.debug ('[BackgroundNotification] setting alarmData object to ' + JSON.stringify (alarmData))
+    Ti.API.debug ('[BackgroundNotification] setting alarmData object to ' + JSON.stringify (alarmData));
     Ti.App.Properties.setObject ('alarmData', alarmData);
 }
 else

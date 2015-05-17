@@ -36,6 +36,8 @@ function TimerWindow ()
 	var _notifications = [];
 	var _soundPlayer = Ti.Media.createSound({url:"/sounds/alarm2.mp3"});
 	
+	Ti.API.debug ("loaded sound: " + _soundPlayer.url);
+	
 	var _segmentLength = Ti.App.Properties.getInt('option_timer_segment_length', 240);
 	var _numSegments = Ti.App.Properties.getInt('option_timer_num_segments', 4);
 
@@ -58,9 +60,9 @@ function TimerWindow ()
 		title: 'Timer'
 	});
 	
-	var margin = TU.UI.Sizer.getDimension (10);
-	var btnw = TU.UI.Sizer.getDimensionExact (45, 60, 90, 120, 180);
-	var btnh = TU.UI.Sizer.getDimensionExact (45, 60, 90, 120, 180);	
+	var margin = 10;
+	var btnw = 90;
+	var btnh = 90;	
 	
     Ti.Gesture.addEventListener('orientationchange', function(e) {
         createUI ();
@@ -194,7 +196,7 @@ function TimerWindow ()
             });
         }
         
-        Ti.API.debug ('[scheduleNotifications] setting alarmData object to ' + JSON.stringify (_alarmData))
+        Ti.API.debug ('[scheduleNotifications] setting alarmData object to ' + JSON.stringify (_alarmData));
         Ti.App.Properties.setObject ('alarmData', _alarmData);
     }
     
@@ -357,6 +359,7 @@ function TimerWindow ()
 	
 	function playSound ()
 	{
+	    Ti.API.debug ("playing sound: " + _soundPlayer.url);
 		_soundPlayer.play();
 	}
 	
@@ -451,7 +454,7 @@ function TimerWindow ()
 			return;	
 		}
 		
-		var delta = parseInt ((e.y - _touchStartY) / (_hVFD / 4) * -1);
+		var delta = parseInt ((e.y - _touchStartY) / (_hVFD / 8) * -1);
 		_segmentLength = delta * _touchStartIncrement + _touchStartValue;
 		
 		if (_segmentLength < 15)
@@ -627,8 +630,11 @@ function TimerWindow ()
 	
 	function createUILandscape ()
 	{
-		_iv_bg = BackgroundManager.getBackgroundIV ();
-		_self.add (_iv_bg);
+	    var bgimg =BackgroundManager.getBackgroundImage ();
+	    Ti.API.debug ("bgimg: " + bgimg);
+	    _self.setBackgroundImage (bgimg);
+		//_iv_bg = BackgroundManager.getBackgroundIV ();
+		//_self.add (_iv_bg);
 	
 		_wVFD = parseInt ((TU.Device.getDisplayWidth() - 2 * margin) / 6.75);
 		_hVFD = parseInt (_wVFD * 666 / 400);
@@ -655,8 +661,12 @@ function TimerWindow ()
 
 	function createUIPortrait ()
 	{
-		_iv_bg = BackgroundManager.getBackgroundIV ();
-		_self.add (_iv_bg);
+	    var bgimg =BackgroundManager.getBackgroundImage ();
+        Ti.API.debug ("bgimg: " + bgimg);
+        _self.setBackgroundImage (bgimg);
+
+		//_iv_bg = BackgroundManager.getBackgroundIV ();
+		//_self.add (_iv_bg);
 		
 		_wVFD = parseInt ((TU.Device.getDisplayWidth() - 2 * margin) / 4.25);
 		_hVFD = parseInt (_wVFD * 666 / 400);
@@ -727,24 +737,30 @@ function TimerWindow ()
             height: btnh,
             width: btnw,
             left: 0,
-            title: "",
-            backgroundImage: '/images/play.png'
+            title: "a",
+            font: { fontFamily: 'grilltime', fontSize: 32 },
+            color: '#00c6c6',
+            backgroundColor: 'transparent'
         });
 
         _btnPause = Ti.UI.createButton ({
             height: btnh,
             width: btnw,
             left: margin,
-            title: "",
-            backgroundImage: '/images/pause.png'
+            title: "b",
+            font: { fontFamily: 'grilltime', fontSize: 32 },
+            color: '#00c6c6',
+            backgroundColor: 'transparent'
         });
 
 		_btnReset = Ti.UI.createButton ({
             height: btnh,
             width: btnw,
             left: margin,
-            title: "",
-			backgroundImage: '/images/refresh.png'
+            title: "c",
+            font: { fontFamily: 'grilltime', fontSize: 32 },
+            color: '#00c6c6',
+            backgroundColor: 'transparent'
 		});
 
         _vbuttons.add (_btnPlay);

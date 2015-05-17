@@ -1,7 +1,7 @@
 var TU = require ("/TitanUp/TitanUp");
 
 function ApplicationTabGroup() {
-	var _self = TU.UI.TGWM.createTabGroup ();
+	var _self = TU.UI.createTGWM ();
 		
 	var TimerWindow = require ('/ui/common/TimerWindow');
 	var win1 = new TimerWindow();

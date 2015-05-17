@@ -1,35 +1,20 @@
-<?xml version="1.0" ?><manifest android:installLocation="auto" android:versionCode="1" android:versionName="1" package="com.smorgasbork.grilltime" xmlns:android="http://schemas.android.com/apk/res/android">
-	<uses-sdk android:minSdkVersion="8"/>
-
-	<!-- TI_MANIFEST -->
-
-	<application android:debuggable="false" android:icon="@drawable/appicon" android:label="GrillTime" android:name="GrilltimeApplication">
-
-		<receiver android:name="bencoding.alarmmanager.AlarmNotificationListener"/><receiver android:name="bencoding.alarmmanager.AlarmServiceListener"/>
-
-		<activity android:configChanges="keyboardHidden|orientation" android:label="GrillTime" android:name=".GrilltimeActivity" android:theme="@style/Theme.Titanium">
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.smorgasbork.grilltime" android:versionCode="1" android:versionName="1.0">
+	<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="21"/>
+	<application android:icon="@drawable/appicon" android:label="GrillTime" android:name="GrilltimeApplication" android:debuggable="false" android:theme="@style/Theme.AppCompat">
+		<activity android:name=".GrilltimeActivity" android:label="@string/app_name" android:theme="@style/Theme.Titanium" android:configChanges="keyboardHidden|orientation|screenSize">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-
-		<activity android:configChanges="keyboardHidden|orientation" android:launchMode="singleTask" android:name="ti.modules.titanium.map.TiMapActivity"/>
-	<uses-library android:name="com.google.android.maps"/>
-
-		<activity android:configChanges="keyboardHidden|orientation" android:name="org.appcelerator.titanium.TiActivity"/>
-		<activity android:configChanges="keyboardHidden|orientation" android:name="org.appcelerator.titanium.TiTranslucentActivity" android:theme="@android:style/Theme.Translucent"/>
-		<activity android:configChanges="keyboardHidden|orientation" android:name="org.appcelerator.titanium.TiModalActivity" android:theme="@android:style/Theme.Translucent"/>
-		<activity android:configChanges="keyboardHidden|orientation" android:name="ti.modules.titanium.ui.TiTabActivity"/>
-		<activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity"/>
-
-		<service android:exported="false" android:name="org.appcelerator.titanium.analytics.TiAnalyticsService"/>
+		<activity android:name="org.appcelerator.titanium.TiActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
+		<activity android:name="org.appcelerator.titanium.TiTranslucentActivity" android:configChanges="keyboardHidden|orientation|screenSize" android:theme="@style/Theme.AppCompat.Translucent"/>
+		<activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:configChanges="screenSize"/>
 		<service android:name="com.smorgasbork.grilltime.BackgroundNotificationService"/>
-
-
+		<receiver android:name="bencoding.alarmmanager.AlarmNotificationListener"/>
+		<receiver android:name="bencoding.alarmmanager.AlarmServiceListener"/>
 	</application>
-
-	<uses-permission android:name="android.permission.VIBRATE"/>
 	<uses-permission android:name="android.permission.WAKE_LOCK"/>
-
+	<uses-permission android:name="android.permission.VIBRATE"/>
 </manifest>

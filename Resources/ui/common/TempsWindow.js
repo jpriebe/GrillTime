@@ -20,17 +20,15 @@ function TempsWindow ()
 		_self.add (_iv_bg);
 	});
 		
-    var margin = TU.UI.Sizer.getDimension (10);
-    var rowh = TU.UI.Sizer.getDimension (50);
+    var margin = 10;
+    var rowh = 50;
 
     _tv_menu = Ti.UI.createTableView ({
         top: margin,
         left: margin,
         right: margin,
         bottom: margin,
-        borderRadius: margin,
-        borderColor: TU.UI.Theme.textColor,
-        separatorColor: TU.UI.Theme.textColor,
+        separatorColor: 'transparent',
         backgroundColor: 'transparent',
         zIndex: 200        
     });
@@ -47,7 +45,7 @@ function TempsWindow ()
     		selectedBackgroundColor: TU.UI.Theme.highlightColor,
     		font: TU.UI.Theme.fonts.mediumBold
     	});
-    	r.data = temps[i].temps;
+    	r.data = temps[i];
     	
     	rows.push (r);
     }    
@@ -57,7 +55,7 @@ function TempsWindow ()
 	_tv_menu.addEventListener ('click', function (e) {
 		var TempDetailWindow = require ('/ui/common/TempDetailWindow');
 		var win = new TempDetailWindow (e.source.data);
-		TU.UI.TGWM.openWindow (win);
+		TU.UI.openWindow (win);
 	});
 	
 	_self.add (_tv_menu);    

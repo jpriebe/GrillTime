@@ -10,11 +10,6 @@
  *  
  */
 
-//bootstrap and check dependencies
-if (Ti.version < 1.8 ) {
-	alert('Sorry - this application template requires Titanium Mobile SDK 1.8 or later');
-}
-
 var TU = require ('/TitanUp/TitanUp');
 
 // This is a single context application with mutliple windows in a stack
@@ -28,6 +23,16 @@ var TU = require ('/TitanUp/TitanUp');
     
 	if (TU.Device.getOS () == 'ios')
 	{
+	    if (parseInt(Ti.Platform.version.split(".")[0]) >= 8)
+	    {
+            Ti.App.iOS.registerUserNotificationSettings({
+                types: [
+                    Ti.App.iOS.USER_NOTIFICATION_TYPE_ALERT,
+                    Ti.App.iOS.USER_NOTIFICATION_TYPE_SOUND
+                ]
+            });
+	    }
+        	    
 		var fontname = "Bitter";
 		TU.UI.Theme.fonts = {
 			small: { fontSize: 12, fontFamily: 'Bitter' },

@@ -10,13 +10,15 @@ function TempDetailWindow (detail)
 	var _btn_options = null;
 	var _dlg_options = null;
 	
-    var margin = TU.UI.Sizer.getDimension (10);
-    var rowh = TU.UI.Sizer.getDimension (50);	
-	var btnw = TU.UI.Sizer.getDimensionExact (30, 45, 60, 90, 135);
-	var btnh = TU.UI.Sizer.getDimensionExact (30, 45, 60, 90, 135);	
+    var margin = 10;
+    var rowh = 50;
+	var btnw = 60;
+	var btnh = 60;
 	
+	Ti.API.debug ("Creating TempDetailWindow with title " + detail.label);
 	_self = Ti.UI.createWindow ({
-		title: detail.label
+		title: detail.label,
+		backButtonTitle: ''
 	});
 	
 	_iv_bg = BackgroundManager.getBackgroundIV ();
@@ -39,9 +41,7 @@ function TempDetailWindow (detail)
         left: margin,
         right: margin,
         bottom: 2 * margin + btnh,
-        borderRadius: margin,
-        borderColor: TU.UI.Theme.textColor,
-        separatorColor: TU.UI.Theme.textColor, 
+        separatorColor: 'transparent', 
         backgroundColor: 'transparent',
         zIndex: 200
     });
@@ -51,7 +51,7 @@ function TempDetailWindow (detail)
 	    
 	    var idx = Ti.App.Properties.getInt ('option_temps_source', 0);
 	    
-	    for (var i = 0; i < detail.length; i++)
+	    for (var i = 0; i < detail.temps.length; i++)
 	    {
 	    	var r = Ti.UI.createTableViewRow ({
 	    		height: rowh,
@@ -61,7 +61,7 @@ function TempDetailWindow (detail)
 	    	});
 	    	
 	    	var l1 = Ti.UI.createLabel ({
-	    		text: detail[i].label,
+	    		text: detail.temps[i].label,
 	    		width: "70%",
 	    		left: margin,
 	    		color: TU.UI.Theme.textColor,
@@ -70,8 +70,8 @@ function TempDetailWindow (detail)
 	    	r.add (l1);
 	    	
 	    	var temp = (idx == 0)
-	    		? detail[i].values.usda
-	    		: detail[i].values.chef;
+	    		? detail.temps[i].values.usda
+	    		: detail.temps[i].values.chef;
 	    	 
 	    	var l2 = Ti.UI.createLabel ({
 	    		text: temp,
@@ -117,8 +117,11 @@ function TempDetailWindow (detail)
 		width: btnw,
 		bottom: margin,
 		right: margin,
-		backgroundImage: '/images/gear.png',
-		zIndex: 200
+        title: "d",
+        font: { fontFamily: 'grilltime', fontSize: 32 },
+        color: '#fff',
+        backgroundColor: 'transparent',
+  		zIndex: 200
 	});
 	
 	_btn_options.addEventListener('click', function()
