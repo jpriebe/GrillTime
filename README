@@ -1,29 +1,5 @@
-GrillTime, copyright 2012 smorgasbork.com
+GrillTime, copyright 2015 smorgasbork.com
 
+Simple multi-segment grill timer, with temperature references and gorgeous photography.
 
-Grilltime Upfit
-
-- splash screens -- all new sizes; change master size to 2000x3332
-
-- appicon: 
-  - need @3x versions
-
-- icons:  would need @3x versions, but we'll just go ahead and use icon fonts
-
-- latest TitanUp; remove Sizer calls
-
-- ios8: need to call Ti.App.iOS.registerUserNotificationSettings to get
-  permission from the user to send local notifications
-
-- fixed back button text on ios
-
-- TableView aesthetics
-  - borders - look dated, especially with the rounded corners
-  - separators - look crappy, especially on iOS 7+ -- indented on left only, and showing up on empty rows
-
-
-**** TitanUp changes
- - TGWM
- - UI
-
-
+Implemented using Appcelerator Titanium.
