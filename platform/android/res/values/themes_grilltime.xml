@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="Grilltime" parent="Theme.AppCompat">
+    <item name="colorPrimary">#666</item>
+    <item name="colorPrimaryDark">#333</item>
+    <item name="colorAccent">#fe690b</item>
+    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    <item name="actionBarTheme">@style/ActionBarTheme</item>
+    <item name="actionBarStyle">@style/ActionBarStyle</item>
+  </style>
+
+  <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+      <item name="spinBars">false</item>
+      <item name="color">#fff</item>
+  </style>
+
+  <style name="ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">       
+    <!-- back arrow color -->
+    <item name="colorControlNormal">#fff</item>
+  </style>
+
+  <style name="ActionBarStyle" parent="@style/Widget.AppCompat.ActionBar.Solid">
+      <item name="titleTextStyle">@style/ActionBarTitleStyle</item>
+  </style>
+
+  <style name="ActionBarTitleStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+      <item name="android:textColor">#fff</item>
+  </style>
+
+</resources>

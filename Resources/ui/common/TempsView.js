@@ -1,25 +1,18 @@
 var TU = require ('/TitanUp/TitanUp');
-var BackgroundManager = require ('/ui/common/BackgroundManager');
 
-function TempsWindow ()
+function TempsView ()
 {
 	var _self = null;
 	var _tv_menu = null;
 	var _iv_bg = null;
 	
-	_self = Ti.UI.createWindow ({
-		title: L('Temps')
+	_self = Ti.UI.createView ({
+	    top: 0,
+	    left: 0,
+	    right: 0,
+	    bottom: 0
 	});
 	
-	_iv_bg = BackgroundManager.getBackgroundIV ();
-	_self.add (_iv_bg);
-	
-	Ti.Gesture.addEventListener('orientationchange', function(e) {
-		_self.remove (_iv_bg);
-		_iv_bg = BackgroundManager.getBackgroundIV ();
-		_self.add (_iv_bg);
-	});
-		
     var margin = 10;
     var rowh = 50;
 
@@ -63,4 +56,4 @@ function TempsWindow ()
 	return _self;
 }
 
-module.exports = TempsWindow;
+module.exports = TempsView;
