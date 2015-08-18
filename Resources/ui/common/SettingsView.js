@@ -35,7 +35,7 @@ function SettingsView (params)
         layout: 'vertical'
     });
 
-    var v;
+    var v, l, p, vals, validx;
 
     //v = create_section_header('General');
     //_content_view.add (v);
@@ -48,28 +48,26 @@ function SettingsView (params)
         layout: 'horizontal'
     });
 
-    var l = Ti.UI.createLabel ({
+    l = Ti.UI.createLabel ({
         font: TU.UI.Theme.fonts.medium,
         color: TU.UI.Theme.lightTextColor,
         left: 0,
-        text: "Temps",
+        text: L("Temps"),
         width: Ti.UI.SIZE,
         height: Ti.UI.FILL
     });
 
     v.add (l);
 
-    var identifiers = [
-        'usda_temps',
-        'chefs_temps'
-    ];
-
-    var p = TU.UI.createSimplePicker ({
+    vals = [L('USDA_Temps'), L('Chefs_Temps')];
+    validx = Ti.App.Properties.getInt ('option_temps_source', 0);
+    
+    p = TU.UI.createSimplePicker ({
         left: _margin,
         width: Ti.UI.FILL,
         height: 48,
-        values: [L('USDA_Temps'), L('Chefs_Temps')],
-        value: Ti.App.Properties.getInt ('option_temps_source', 0),
+        values: vals,
+        value: vals[validx],
         parent: _self,
         backgroundColor: TU.UI.Theme.darkBackgroundColor,
         color: TU.UI.Theme.lightTextColor
@@ -83,6 +81,55 @@ function SettingsView (params)
 
     _content_view.add (v);
     
+    //v = create_section_header('General');
+    //_content_view.add (v);
+
+    v = Ti.UI.createView ({
+        height: 48,
+        top: _margin,
+        left: _margin,
+        right: _margin,
+        layout: 'horizontal'
+    });
+
+    l = Ti.UI.createLabel ({
+        font: TU.UI.Theme.fonts.medium,
+        color: TU.UI.Theme.lightTextColor,
+        left: 0,
+        text: L("Alarm"),
+        width: Ti.UI.SIZE,
+        height: Ti.UI.FILL
+    });
+
+    v.add (l);
+
+    vals = [L('Alarm1'), L('Alarm2'), L('Alarm3'), L('Alarm4'), L('Alarm5')];
+    validx = Ti.App.Properties.getInt ('option_alarm_sound', 0);
+    
+    p = TU.UI.createSimplePicker ({
+        left: _margin,
+        width: Ti.UI.FILL,
+        height: 48,
+        values: vals,
+        value: vals[validx],
+        parent: _self,
+        backgroundColor: TU.UI.Theme.darkBackgroundColor,
+        color: TU.UI.Theme.lightTextColor
+    });
+
+    p.addEventListener ('change', function (e) {
+        var sound_idx = e.index + 1;
+        
+        var sp = Ti.Media.createSound({url:"/sounds/alarm" + sound_idx + ".mp3"});
+        sp.play ();
+
+        Ti.App.Properties.setInt ('option_alarm_sound', e.index);
+    });
+
+    v.add (p);
+
+    _content_view.add (v);
+
     _sv.add (_content_view);
 
     _self.add (_sv);

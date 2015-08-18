@@ -33,7 +33,10 @@ function TimerWindow ()
 	var _hVFD = 0;
 
 	var _notifications = [];
-	var _soundPlayer = Ti.Media.createSound({url:"/sounds/alarm2.mp3"});
+	
+	var _sound_idx = Ti.App.Properties.getInt ('option_alarm_sound', 0) + 1;
+	
+	var _soundPlayer = Ti.Media.createSound({url:"/sounds/alarm" + _sound_idx + ".mp3"});
 	
 	Ti.API.debug ("loaded sound: " + _soundPlayer.url);
 	
@@ -64,10 +67,6 @@ function TimerWindow ()
 	var margin = 10;
 	var btnw = 90;
 	var btnh = 90;	
-	
-    Ti.Gesture.addEventListener('orientationchange', function(e) {
-        createUI ();
-    });
 	
     // fired when an app resumes from suspension
     Ti.App.addEventListener('resume',function(e){
@@ -167,7 +166,7 @@ function TimerWindow ()
 				var n = Ti.App.iOS.scheduleLocalNotification ({
 					alertBody: L("Timer_segment") + " " + segnum,
 				    alertAction: L("OK"),
-				    sound: "/sounds/alarm2.mp3",
+				    sound: "/sounds/alarm" + sound_idx + ".mp3",
 				    date: ndate
 				});
 				
@@ -182,7 +181,7 @@ function TimerWindow ()
             var now = new Date ().getTime ();
             now = parseInt (now  / 1000);
             
-            _alarmData.sound = "/sounds/alarm2.mp3";
+            _alarmData.sound = "/sounds/alarm" + _sound_idx + ".mp3";
             _alarmData.icon = Ti.App.Android.R.drawable.appicon,
             _alarmData.title = L("GrillTime");
             _alarmData.message = L("Timer_segment_fmt");
@@ -264,6 +263,9 @@ function TimerWindow ()
         setButtonEnabled (_btnPlay, true);
         setButtonEnabled (_btnPause, false);
         setButtonEnabled (_btnReset, false);
+        
+        _sound_idx = Ti.App.Properties.getInt ('option_alarm_sound', 0) + 1;
+        _soundPlayer = Ti.Media.createSound({url:"/sounds/alarm" + _sound_idx + ".mp3"});
 	}
 	
 	function computeRemaining ()
@@ -455,7 +457,7 @@ function TimerWindow ()
 			return;	
 		}
 		
-		var delta = parseInt ((e.y - _touchStartY) / (_hVFD / 8) * -1);
+		var delta = parseInt ((e.y - _touchStartY) / (_hVFD * -1));
 		_segmentLength = delta * _touchStartIncrement + _touchStartValue;
 		
 		if (_segmentLength < 15)
@@ -498,7 +500,7 @@ function TimerWindow ()
 			return;	
 		}
 
-		var delta = parseInt ((e.y - _touchStartY) / (_hVFD / 4) * -1);
+		var delta = parseInt ((e.y - _touchStartY) / (_hVFD / 2) * -1);
 		_numSegments = delta * _touchStartIncrement + _touchStartValue;
 		
 		if (_numSegments < 1)		
@@ -627,32 +629,7 @@ function TimerWindow ()
             btn.setOpacity (0.5);
 	    }
 	}
-	
-	
-	function createUILandscape ()
-	{
-		_wVFD = parseInt ((TU.Device.getDisplayWidth() - 2 * margin) / 6.75);
-		_hVFD = parseInt (_wVFD * 666 / 400);
 		
-		var y = margin;
-		
-		_vdigitsTimeContainer = Ti.UI.createView ({
-			top: y,
-			left: 0,
-			width: parseInt (4.25 * _wVFD),
-			height: _hVFD
-		});
-		
-		_vdigitsSegmentContainer = Ti.UI.createView ({
-			top: y,
-			right: 0,
-			width: parseInt (2.5 * _wVFD),
-			height: _hVFD
-		});
-		
-		_currOrientation = 'landscape';
-	}
-	
 
 	function createUIPortrait ()
 	{
@@ -683,24 +660,12 @@ function TimerWindow ()
 		var w = TU.Device.getDisplayWidth();
 		var h = TU.Device.getDisplayHeight();
 		
-		if (w > h)
+		if (_currOrientation == 'portrait')
 		{
-			if (_currOrientation == 'landscape')
-			{
-			    return;
-			}
-            destroyUI ();
-            createUILandscape ();
+		    return;
 		}
-		else
-		{
-			if (_currOrientation == 'portrait')
-			{
-			    return;
-			}
-            destroyUI ();
-            createUIPortrait ();
-		}
+        destroyUI ();
+        createUIPortrait ();
 		
 		layoutTimeDigits ();
 		layoutSegmentDigits ();
@@ -725,7 +690,7 @@ function TimerWindow ()
             height: btnh,
             width: btnw,
             left: 0,
-            title: "a",
+            title: "\ue000",
             font: { fontFamily: 'grilltime', fontSize: 32 },
             color: '#00c6c6',
             backgroundColor: 'transparent'
@@ -735,7 +700,7 @@ function TimerWindow ()
             height: btnh,
             width: btnw,
             left: margin,
-            title: "b",
+            title: "\ue001",
             font: { fontFamily: 'grilltime', fontSize: 32 },
             color: '#00c6c6',
             backgroundColor: 'transparent'
@@ -745,7 +710,7 @@ function TimerWindow ()
             height: btnh,
             width: btnw,
             left: margin,
-            title: "c",
+            title: "\ue002",
             font: { fontFamily: 'grilltime', fontSize: 32 },
             color: '#00c6c6',
             backgroundColor: 'transparent'

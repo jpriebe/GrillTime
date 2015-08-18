@@ -55,6 +55,6 @@ var TU = require ('/TitanUp/TitanUp');
 		};
 	}
 	
-	var ApplicationTabGroup = require('ui/common/ApplicationTabGroup');
-	new ApplicationTabGroup().open();
+	var MainWindow = require ('/ui/common/MainWindow');
+	new MainWindow ().open ();
 })();

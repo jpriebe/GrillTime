@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+	<string name="Slideshow">Slideshow</string>
+	<string name="Settings">Settings</string>
+	<string name="About">About</string>
 	<string name="Timer">Timer</string>
 	<string name="Temps">Temps</string>
+    <string name="TIMER">TIMER</string>
+    <string name="TEMPS">TEMPS</string>
 	<string name="Beef">Beef</string>
 	<string name="Ground_Beef">Beef (ground)</string>
 	<string name="Lamb">Lamb</string>
@@ -38,4 +43,10 @@
     <string name="Timer_segment_fmt">Timer segment %1$s</string>
     <string name="Timer_segment">Timer segment</string>
 	<string name="GrillTime">GrillTime</string>
+    <string name="Alarm">Alarm</string>
+    <string name="Alarm1">Alarm 1</string>
+    <string name="Alarm2">Alarm 2</string>
+    <string name="Alarm3">Alarm 3</string>
+    <string name="Alarm4">Alarm 4</string>
+    <string name="Alarm5">Alarm 5</string>
 </resources>

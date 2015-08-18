@@ -3,7 +3,7 @@ var TU = require ('/TitanUp/TitanUp');
 function SlideshowView (params)
 {
     var images = [];
-    for (var i = 0; i < 14; i++)
+    for (var i = 0; i < 18; i++)
     {
         var i1 = i + 1;
         
@@ -32,7 +32,8 @@ function SlideshowView (params)
         right: 0,
         bottom: 0,
         config: {
-            allowThumbview: false,
+            allowThumbView: false,
+            showImageCount: true,
             images: images
         }
     });

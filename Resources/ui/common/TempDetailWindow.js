@@ -24,17 +24,17 @@ function TempDetailWindow (detail)
 	_iv_bg = BackgroundManager.getBackgroundIV ();
 	_self.add (_iv_bg);
 	
-	var onOrientationChange = function(e) {
-		_self.remove (_iv_bg);
-		_iv_bg = BackgroundManager.getBackgroundIV ();
-		_self.add (_iv_bg);
-	};
-	
-	Ti.Gesture.addEventListener('orientationchange', onOrientationChange);
+    var _overlay = Ti.UI.createView ({
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: '#000',
+        opacity: 0.5
+    });
+    
+    _self.add (_overlay);
 
-	_self.addEventListener ('close', function (e) {
-		Ti.Gesture.removeEventListener ('orientationchange', onOrientationChange);
-	});
 	
     _tv_menu = Ti.UI.createTableView ({
         top: margin,

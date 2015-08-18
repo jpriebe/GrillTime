@@ -4,14 +4,16 @@ var MainView = require ('/ui/common/MainView');
 function MainWindow ()
 {
     var mitems = [
-        { identifier: "settings", caption: "Settings" },
-        { identifier: "about", caption: "About" }
+        { identifier: "slideshow", caption: L('Slideshow') },
+        { identifier: "settings", caption: L('Settings') },
+        { identifier: "about", caption: L('About') }
     ];
     
     var _main_view = new MainView ();
     
     var _self = TU.UI.createDrawerMenuWM ({
-        title: "GrillTime",
+        title: TU.getAppName (),
+        title_image: '/images/title_logo.png',
         backgroundColor: TU.UI.Theme.backgroundColor,
         main_view: _main_view,
         menu_params: {
@@ -21,6 +23,7 @@ function MainWindow ()
             bar_color: TU.UI.Theme.darkBackgroundColor, // ios-only
             bar_text_color: 'white'
         },
+        orientation_modes: [ Ti.UI.PORTRAIT ],
         menu_items: mitems
     });
     
@@ -29,6 +32,14 @@ function MainWindow ()
         var v = null;
         switch (e.identifier)
         {
+            case 'slideshow':
+                var SlideshowView = require ('/ui/common/SlideshowView');
+                v = new SlideshowView ();
+                var w = Ti.UI.createWindow ();
+                w.add (v);
+                TU.UI.openWindow (w);
+                break;
+
             case 'settings':
                 var SettingsView = require ('/ui/common/SettingsView');
                 v = new SettingsView ();

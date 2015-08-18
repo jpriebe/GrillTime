@@ -17,6 +17,17 @@ function MainView ()
     var _iv_bg = BackgroundManager.getBackgroundIV ();
     _self.add (_iv_bg);
     
+    var _overlay = Ti.UI.createView ({
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: '#000',
+        opacity: 0.5
+    });
+    
+    _self.add (_overlay);
+    
     var _tv = TU.UI.createTabView ({
         top: 10,
         config: {
@@ -45,12 +56,6 @@ function MainView ()
 
     _self.add (_tv);
 
-    Ti.Gesture.addEventListener('orientationchange', function(e) {
-        _self.remove (_iv_bg);
-        _iv_bg = BackgroundManager.getBackgroundIV ();
-        _self.add (_iv_bg);
-    });
-            
     return _self;
 }
 
