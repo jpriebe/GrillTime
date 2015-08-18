@@ -300,6 +300,26 @@ function GalleryViewImagePager (params) {
 
     function load_image_via_xhr (v, url)
     {
+        url = '' + url;
+        if (url.match (/^\//))
+        {
+            var iv = TiTouchImageView.createView({
+                backgroundColor : '#000',
+                image: url,
+                defaultImage: '',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zoom: 1,
+                maxZoom: 3,
+                minZoom: 0.25
+            });
+
+            v.add (iv);
+            return;
+        }
+        
         var xhr = Ti.Network.createHTTPClient ();
 
         xhr.onload = function (e) {
@@ -347,15 +367,31 @@ function GalleryViewImagePager (params) {
             return v;
         }
 
+        var view;
+        url = '' + url;
+        if (url.match (/^\//))
+        {
+            // local image
+            view = Ti.UI.createImageView({
+                backgroundColor : '#000',
+                width : w,
+                height : h,
+                image : url,
+                defaultImage: ''
+            });            
+        }
+        else
+        {
+            view = TU.UI.createRemoteImageView({
+                backgroundColor : '#000',
+                width : w,
+                height : h,
+                image : url,
+                defaultImage: ''
+            });
+        }
+        
 
-        //var view = Ti.UI.createImageView({
-        var view = TU.UI.createRemoteImageView({
-            backgroundColor : '#000',
-            width : w,
-            height : h,
-            image : url,
-            defaultImage: ''
-        });
 
         var sv = Ti.UI.createScrollView({
             top: 0,

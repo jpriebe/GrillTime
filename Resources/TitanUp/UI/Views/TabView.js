@@ -10,6 +10,7 @@ function TabView (params)
     var _content_views = [];
 
     var _current_panel_idx = -1;
+    var _selected_tab = null;
     
     var _tab_labels = [];
     var _tab_height = 40;
@@ -21,9 +22,11 @@ function TabView (params)
     var _tab_color = TU.UI.Theme.lightTextColor;
     var _tab_color_active = TU.UI.Theme.lightTextColor;
     var _tab_color_selected = TU.UI.Theme.lightTextColor;
+    var _tab_color_selected_active = TU.UI.Theme.lightTextColor;
     var _tab_background_color = TU.UI.Theme.darkBackgroundColor;
     var _tab_background_color_active = TU.UI.Theme.darkBackgroundColor;
     var _tab_background_color_selected = TU.UI.Theme.darkBackgroundColor;
+    var _tab_background_color_selected_active = TU.UI.Theme.darkBackgroundColor;
 
     var _width = 0;
     var _tab_width = 0;
@@ -106,6 +109,15 @@ function TabView (params)
             _tab_color_selected = config.tab_color_selected;
         }
 
+        if (typeof config.tab_color_selected_active !== 'undefined')
+        {
+            _tab_color_selected_active = config.tab_color_selected_active;
+        }
+        else
+        {
+            _tab_color_selected_active = _tab_color_active;
+        }
+
         if (typeof config.tab_background_color !== 'undefined')
         {
             _tab_background_color = config.tab_background_color;
@@ -120,12 +132,22 @@ function TabView (params)
         {
             _tab_background_color_selected = config.tab_background_color_selected;
         }
+
+        if (typeof config.tab_background_color_selected_active !== 'undefined')
+        {
+            _tab_background_color_selected_active = config.tab_background_color_selected_active;
+        }
+        else
+        {
+            _tab_background_color_selected_active = _tab_background_color_active;
+        }
     }
 
     function _init ()
     {
         if (typeof params.width === 'undefined')
         {
+            // fixme -- this assumes that the tab bar is being added to a full-width view
             _width = TU.Device.getDisplayWidth ();
             params.width = _width;
         }
@@ -169,8 +191,19 @@ function TabView (params)
             function addEventListeners (t)
             {
                 tab.addEventListener('touchstart', function (e) {
-                    t.label.setColor (_tab_color_active);
-                    t.setBackgroundColor (_tab_background_color_active);
+                    t.inactive_color = t.label.getColor ();
+                    t.inactive_background_color = t.getBackgroundColor ();
+
+                    if (t === _selected_tab)
+                    {
+                        t.label.setColor (_tab_color_selected_active);
+                        t.setBackgroundColor (_tab_background_color_selected_active);
+                    }
+                    else
+                    {
+                        t.label.setColor (_tab_color_active);
+                        t.setBackgroundColor (_tab_background_color_active);
+                    }
                 });
 
                 tab.addEventListener('touchend', function (e) {
@@ -178,8 +211,8 @@ function TabView (params)
                 });
 
                 tab.addEventListener('touchcancel', function (e) {
-                    t.label.setColor (_tab_color);
-                    t.setBackgroundColor (_tab_background_color);
+                    t.label.setColor (t.inactive_color);
+                    t.setBackgroundColor (t.inactive_background_color);
                 });
             }
 
@@ -301,6 +334,7 @@ function TabView (params)
         });
 
         _current_panel_idx = idx;
+        _selected_tab = _tabs[idx];
     }
 }
 
