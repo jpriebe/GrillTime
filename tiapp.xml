@@ -8,7 +8,7 @@
     <version>1.1.0</version>
     <publisher>priebe</publisher>
     <url>http://www.smorgasbork.com/</url>
-    <description>undefined</description>
+    <description>A simple multi-segment grill timer</description>
     <copyright>2015 by priebe</copyright>
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
