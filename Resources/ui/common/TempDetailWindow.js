@@ -117,7 +117,7 @@ function TempDetailWindow (detail)
 		width: btnw,
 		bottom: margin,
 		right: margin,
-        title: "d",
+        title: "\ue003",
         font: { fontFamily: 'grilltime', fontSize: 32 },
         color: '#fff',
         backgroundColor: 'transparent',
